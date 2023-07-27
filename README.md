@@ -2,6 +2,8 @@
 
 ---
 
+---
+
 ## **Backend**
 
 - Java 17 
@@ -16,6 +18,9 @@
 - React
 - Bootstrap
 
+---
+Resume: Unfetch video.
 
+What is UNFETCH doing for me? What is polyfill? 
 
 
