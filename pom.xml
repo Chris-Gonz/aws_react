@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.5</version>
         <relativePath />
         <!-- lookup parent from repository -->
     </parent>
@@ -16,20 +16,26 @@
     <name>aws_react</name>
     <description>aws_react</description>
     <properties>
+        <basedir>/Users/cvg/Projects/Personal/AWS_REACT/aws_react</basedir>
         <java.version>17</java.version>
         <app.image.name>springboot-react-fullstack</app.image.name>
-        <app.image.tag />
+        <app.image.tag/>
     </properties>
     <dependencies>
+        <dependency>
+         <groupId>com.github.javafaker</groupId>
+             <artifactId>javafaker</artifactId>
+              <version>1.0.2</version>
+        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.3</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>3.2.4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -188,8 +194,7 @@
                                 </goals>
                                 <configuration>
                                     <to>
-                                        <image>
-                                            docker.io/chrisgonz92/${app.image.name}:${app.image.tag}</image>
+                                        <image>docker.io/chrisgonz92/${app.image.name}:${app.image.tag}</image>
                                     </to>
                                 </configuration>
                             </execution>
