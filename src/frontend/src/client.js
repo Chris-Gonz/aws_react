@@ -12,4 +12,9 @@ const checkStatus = (response) => {
 };
 
 export const getAllStudents = () =>
-  fetch("api/students").then(checkStatus);
+  fetch("api/students")
+    .then(checkStatus)
+    .catch(error => {
+      console.error('Error:', error);
+      return [];
+    });
