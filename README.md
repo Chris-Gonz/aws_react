@@ -8,11 +8,14 @@
   - Spring web
   - Lombok
 - Web Server - Apache Tomcat
+
 ---
 
 ### [SpringBoot](https://spring.io/projects/spring-boot)
 
 The backend uses SpringBoot to do all the heavy lifting. I utilize this framework heavily to save personal time and get up and running faster. Another reason is the simplicity of the application I am building. The majority of the features I am implementing are provided by the framework.  
+
+This project will loosely follow a MVC architecture.
 
 ### [Maven](https://maven.apache.org/)
 
@@ -25,7 +28,7 @@ Notes: Maven is a a project management tool. A quality of life improvement for d
 - Jib-push-to-dockerHub - This profile uses jib to push a image to the remote repo, currently docker hub
 
 ```shell
-Commands used to build front and back end to contianer: 
+Commands used to build front and back end to container: 
 
 ./mvnw clean install -P frontend-build -P jib-push-to-dockerhub -Dapp.image.tag=2
 
@@ -71,7 +74,7 @@ Since we bundled the back and front end we will only define the backend service 
 
 ### [Postgresql](https://www.postgresql.org/)
 
-The database used for this project will be postgresql. This will be a docker container. Creating a temp data folder that mounts to the postrges folder in /var 
+The database used for this project will be postgresql. This will be a docker container. Creating a temp data folder that mounts to the postgres folder in /var
 
 ```shell
 

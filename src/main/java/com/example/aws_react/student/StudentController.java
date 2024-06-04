@@ -4,28 +4,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
+import lombok.AllArgsConstructor;
+
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping(path = "api/students")
+@AllArgsConstructor
 public class StudentController {
 
-    @GetMapping
-    public List<Student> getAllStudents(){
-        return Arrays.asList(
-                new Student(
-                        1L,
-                        "Chris",
-                        "chris@gmu.edu",
-                        Gender.MALE
-                ),
-                new Student(
-                        2L,
-                        "Emily",
-                        "emily@gmu.edu",
-                        Gender.FEMALE
-                )
-        );
-    }
+        private final StudentService studentService;
+
+        @GetMapping
+        public List<Student> getAllStudents() {
+                return studentService.getAllStudents();
+        }
+
+        @PostMapping
+        public void addStudentString(@RequestBody Student student) {
+            /*TODO: Needs validation*/
+
+            studentService.addStudent(student);
+        }
+        
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAllStudents } from "./client.js";
-import { Layout, Menu, Breadcrumb, Table } from "antd";
+import { Layout, Menu, Breadcrumb, Table, Button } from "antd";
 import { 
   DesktopOutlined,
   PieChartOutlined,
@@ -9,6 +9,7 @@ import {
   UserOutlined
  } from "@ant-design/icons";
 
+import StudentDrawerForm from "./StudentDrawerForm.js" 
 import "./App.css";
 
 const {Header, Content, Footer, Sider } = Layout;
@@ -41,6 +42,8 @@ const columns = [
 function App() {
   const [students, setStudents] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
+  const [fetching, setFetching] = useState(true); 
+  const [showDrawer, setShowDrawer] = useState(false);
 
   const fetchStudents = () =>
     getAllStudents()
@@ -48,6 +51,11 @@ function App() {
     .then(data => {
       console.log(data);
       setStudents(data);
+      setFetching(false);
+    })
+    .catch(error =>{
+      console.error('Error:', error);
+      setStudents([]);
     });
 
     useEffect(
@@ -58,11 +66,22 @@ function App() {
     );
 
     const renderStudents = () => {
-      if (students.length <= 0) {
+      if (students.length < 0) {
         return "no data available!"; 
       }
-
-      return <Table dataSource={students} columns={columns}/>
+      return <>
+      <StudentDrawerForm
+         showDrawer={showDrawer} 
+         setShowDrawer={setShowDrawer}
+         />
+      <Table dataSource={students || []} 
+      columns={columns} 
+      caption={  
+         <Button 
+         onClick={ () => setShowDrawer(!showDrawer) }
+         id="addStudentButton" className="leftAlignButton" type="primary" size="small"> Add Student </Button>} 
+      />
+      </>
     }
 
     return <Layout style={{ minHeight: '100vh' }}>
@@ -77,7 +96,6 @@ function App() {
                 Option 2
             </Menu.Item>
             <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-                <Menu.Item key="3">Tom</Menu.Item>
                 <Menu.Item key="4">Bill</Menu.Item>
                 <Menu.Item key="5">Alex</Menu.Item>
             </SubMenu>
@@ -101,7 +119,7 @@ function App() {
                 {renderStudents()}
             </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center' }}> CVG </Footer>
     </Layout>
 </Layout>
 }
