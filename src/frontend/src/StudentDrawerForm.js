@@ -1,13 +1,48 @@
-import {Drawer, Input, Col, Select, Form, Row, Button} from 'antd';
+import {Drawer, Input, Col, Select, Form, Row, Button, Spin} from 'antd';
+import {addNewStudent} from "./client";
+import {successNotification, errorNotification} from "./Notification";
+import {useState} from "react";
 
 const {Option} = Select;
 
-function StudentDrawerForm({showDrawer, setShowDrawer}) {
-    const onCLose = () => setShowDrawer(false);
+const antIcon = () => <Spin />;
 
-    const onFinish = values => {
-        alert(JSON.stringify(values, null, 2));
+
+function StudentDrawerForm({showDrawer, setShowDrawer, fetchStudents}) {
+    const onCLose = () => setShowDrawer(false);
+    const [submitting, setSubmitting] = useState(false);
+
+    const onFinish = student => {
+        setSubmitting(true)
+        console.log(JSON.stringify(student, null, 2))
+        addNewStudent(student)
+            .then(() => {
+                console.log("Student Added.")
+                onCLose();
+                successNotification(
+                    "Successfully added!",
+                    `${student.name} was added to the system`
+                )
+                fetchStudents();
+            }).catch(err => {
+            console.log("Error adding student: ", err);
+            try {
+                const responseJson = err.response
+                return responseJson.then(res => {
+                    errorNotification(
+                        "There was an issue",
+                        `${res.message} [${res.status}] [${res.error}]`,
+                        "bottomLeft"
+                    )
+                });
+            } catch (error) {
+                console.error("Failed to parse error response:", error);
+            }
+        }).finally(() => {
+            setSubmitting(false);
+        })
     };
+
 
     const onFinishFailed = errorInfo => {
         alert(JSON.stringify(errorInfo, null, 2));
@@ -78,6 +113,7 @@ function StudentDrawerForm({showDrawer, setShowDrawer}) {
                         </Button>
                     </Form.Item>
                 </Col>
+                <Col>{submitting && <Spin indicator={antIcon} />}</Col>
             </Row>
         </Form>
     </Drawer>

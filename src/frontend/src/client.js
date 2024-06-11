@@ -1,4 +1,4 @@
-import fetch from 'unfetch'
+
 
 const checkStatus = (response) => {
   if (response.ok) {
@@ -12,9 +12,13 @@ const checkStatus = (response) => {
 };
 
 export const getAllStudents = () =>
-  fetch("api/students")
-    .then(checkStatus)
-    .catch(error => {
-      console.error('Error:', error);
-      return [];
-    });
+  fetch("api/students").then(checkStatus);
+
+export const addNewStudent = student =>
+  fetch("api/students", {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(student)
+  }).then(checkStatus)

@@ -23,7 +23,7 @@ public class DataBaseLoader {
             if (repository.count() == 0){
                 Faker faker = new Faker();
     
-                for (int i = 0; i < 1000; i++) {
+                for (int i = 0; i < 100; i++) {
                     Student student = new Student();
                     student.setName(faker.name().fullName());
                     student.setEmail(faker.internet().emailAddress());
