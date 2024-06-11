@@ -1,4 +1,4 @@
-package com.example.aws_react.Student;
+package com.example.aws_react.student;
 
 public enum Gender {
     MALE,
