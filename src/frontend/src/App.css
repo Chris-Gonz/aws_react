@@ -44,6 +44,7 @@
 
 .site-badge-student-count{
   display: inline-block;
+  justify-content: left;
   color: #999;
   background-color: #ffffff;
   /*box-shadow: 0 0 0 1px #d9d9d9 inset;*/
@@ -51,7 +52,16 @@
 
 .student-number-tag{
   display: inline-block;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-right: 10px;
   margin-top: 6px;
+  border: white;
+}
+
+.action-buttons{
+  justify-content: center;
+}
+
+.main-table{
+  width: auto;
 }

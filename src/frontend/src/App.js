@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
-import {getAllStudents} from "./client.js";
-import {Layout, Menu, Breadcrumb, Table, Button, Badge, Tag} from "antd";
+import {deleteStudent, getAllStudents} from "./client.js";
+import {Layout, Menu, Breadcrumb, Table, Button, Badge, Tag, Popconfirm} from "antd";
 import {
     PlusOutlined,
     DesktopOutlined,
@@ -33,6 +33,10 @@ const TheAvatar = ({name}) => {
     </Avatar>;
 }
 
+const removeStudent  = (studentId, callback) => {
+    deleteStudent(studentId, callback);
+}
+
 const columns =  [
     {
         title: '',
@@ -59,6 +63,22 @@ const columns =  [
         title: 'GENDER',
         dataIndex: 'gender',
         key: 'gender'
+    },
+    {
+        title: 'ACTIONS',
+        key: 'actions',
+        render: (text, student) =>
+            <Radio.Group>
+                <Popconfirm
+                    placement='topRight'
+                    title={`Are you sure to delete ${student.name}`}
+                    onConfirm={() => removeStudent(student.id, fetchStudents)}
+                    okText='Yes'
+                    cancelText='No'>
+                    <Radio.Button value="small">Delete</Radio.Button>
+                </Popconfirm>
+                <Radio.Button onClick={() => alert("TODO: Implement edit student")} value="small">Edit</Radio.Button>
+            </Radio.Group>
     }
 ];
 
@@ -103,16 +123,17 @@ function App() {
 
 
         <Table
+            className={"main-table"}
             dataSource={students || []}
             columns={columns}
             bordered
             title={() =>
                 <>
-                    <Tag  className="student-number-tag">students</Tag>
                     <Badge count={students.length} className="site-badge-student-count"/>
+                    <Tag  className="student-number-tag">students</Tag>
                     <Button
                         onClick={() => setShowDrawer(!showDrawer)}
-                        id="addStudentButton" className="leftAlignButton" type="primary" size="small" icon={<PlusOutlined />}>Add Student</Button>
+                        id="addStudentButton" className="leftAlignButton" type="primary" size="small" icon={<PlusOutlined />}>Add student</Button>
                 </>
             }
         />
