@@ -13,7 +13,7 @@
   - Lombok
 - Web Server - Apache Tomcat
 
----
+----
 
 ### [SpringBoot](https://spring.io/projects/spring-boot)
 
@@ -26,6 +26,8 @@ This project will loosely follow a MVC architecture.
 Notes: Maven is a a project management tool. A quality of life improvement for developers of java. In this particular case I added several **profiles**:
 
 - Frontend-build - This will compile my front end and copy the target into the java resource directory.
+  - To run the jar created by this build:
+    ``` java -jar target/aws_react-0.0.1-SNAPSHOT.jar```
   
 - Jib-push-to-Local -  This profile uses jib and dockerize my java app and pushes an image to my local environment
 

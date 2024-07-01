@@ -77,7 +77,7 @@
         <profile>
             <id>frontend-build</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <build>
                 <plugins>
@@ -90,7 +90,7 @@
                         <configuration>
                             <!-- This is the node version it will be running-->
                             <nodeVersion>v20.4.0</nodeVersion>
-                            <workingDirectory>src/frontend</workingDirectory>
+                            <workingDirectory>${basedir}/src/frontend</workingDirectory>
                         </configuration>
                         <executions>
                             <execution>
@@ -138,7 +138,7 @@
                                 <configuration>
                                     <resources>
                                         <resource>
-                                            <directory>src/frontend/build</directory>
+                                            <directory>${basedir}/src/frontend/build</directory>
                                         </resource>
                                     </resources>
                                     <outputDirectory>${basedir}/target/classes/static</outputDirectory>

@@ -1,4 +1,4 @@
-
+import fetch from "unfetch";
 
 const checkStatus = (response) => {
   if (response.ok) {
@@ -27,3 +27,14 @@ export const deleteStudent = studentId =>
     fetch(`api/students/${studentId}`, {
         method: 'DELETE',
     }).then(checkStatus);
+
+export const updateStudent = student => {
+    fetch(`api/students`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify({student})
+    }).then(checkStatus);
+}
+

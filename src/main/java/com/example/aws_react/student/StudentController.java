@@ -1,13 +1,8 @@
 package com.example.aws_react.student;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -30,5 +25,18 @@ public class StudentController {
 
             studentService.addStudent(student);
         }
-        
+
+        @DeleteMapping(path = "{studentId}")
+        public void deleteStudent(
+                @PathVariable("studentId") Long studentId) {
+                studentService.deleteStudent(studentId);
+
+        }
+
+        @PutMapping(path = "studentId")
+        public void updateStudent(@RequestBody Student student) {
+                studentService.updateStudent(student);
+
+        }
+
 }

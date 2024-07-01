@@ -1,6 +1,6 @@
 import {Drawer, Input, Col, Select, Form, Row, Button, Spin} from 'antd';
 import {addNewStudent} from "./client";
-import {successNotification, errorNotification} from "./Notification";
+import {successNotification, errorNotification, warningNotification} from "./Notification";
 import {useState} from "react";
 
 const {Option} = Select;
@@ -26,6 +26,7 @@ function StudentDrawerForm({showDrawer, setShowDrawer, fetchStudents}) {
                 fetchStudents();
             }).catch(err => {
             console.log("Error adding student: ", err);
+
             try {
                 const responseJson = err.response
                 return responseJson.then(res => {
@@ -43,7 +44,6 @@ function StudentDrawerForm({showDrawer, setShowDrawer, fetchStudents}) {
         })
     };
 
-
     const onFinishFailed = errorInfo => {
         alert(JSON.stringify(errorInfo, null, 2));
     };
@@ -52,7 +52,7 @@ function StudentDrawerForm({showDrawer, setShowDrawer, fetchStudents}) {
         title="Create new student"
         width={720}
         onClose={onCLose}
-        visible={showDrawer}
+        open={showDrawer}
         bodyStyle={{paddingBottom: 80}}
         footer={
             <div
