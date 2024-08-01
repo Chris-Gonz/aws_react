@@ -3,7 +3,9 @@ package com.example.aws_react.student;
 
 import java.util.List;
 
+import com.example.aws_react.student.exception.BadRequestException;
 import com.example.aws_react.student.exception.StudentNotFoundException;
+import com.github.javafaker.Bool;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -20,17 +22,12 @@ public class StudentService {
 
     public void addStudent(Student student) {
         // TODO: validation checks
+        boolean emailExists = studentRepository.existsByEmail(student.getEmail());
 
-        try {
-            //check is student email already exists
-            if( studentRepository.existsByEmail(student.getEmail())){
-                throw new
-            }
+        if(emailExists) {
+            throw new BadRequestException("Email " + student.getEmail() + " is already taken");
         }
-
         studentRepository.save(student);
-
-        // throw new UnsupportedOperationException("Unimplemented method 'addStudent'");
     }
 
     public void deleteStudent(Long studentId) {
