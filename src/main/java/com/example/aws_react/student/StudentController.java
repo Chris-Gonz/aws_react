@@ -1,5 +1,6 @@
 package com.example.aws_react.student;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
@@ -20,8 +21,8 @@ public class StudentController {
         }
 
         @PostMapping
-        public void addStudentString(@RequestBody Student student) {
-            /*TODO: Needs validation*/
+        public void addStudentString(@Valid @RequestBody Student student) {
+            //validation is done through validation dependency
 
             studentService.addStudent(student);
         }

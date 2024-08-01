@@ -20,6 +20,8 @@ public class DataBaseLoader {
     CommandLineRunner initDatabase(StudentRepository repository) {
         return args -> {
 
+            //If no table named cvg, create one
+
             if (repository.count() == 0){
                 Faker faker = new Faker();
     
