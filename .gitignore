@@ -41,6 +41,7 @@ node_modules/
 
 ### Local properties
 src/main/resources/application.properties
+src/main/resources/application-dev.properties
 
 
 # dependencies
